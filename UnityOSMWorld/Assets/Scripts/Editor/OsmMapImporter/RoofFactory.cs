@@ -13,11 +13,6 @@ internal class RoofFactory : InfrastructureManager
     private Material roofMat;
 
     /// <summary>
-    /// Roof height
-    /// </summary>
-    private float roofHeight;
-
-    /// <summary>
     /// List of vertices
     /// </summary>
     private List<Vector3> vertices;
@@ -48,10 +43,9 @@ internal class RoofFactory : InfrastructureManager
     /// <param name="xmlBaseFactory">Instance of XmlBaseFactory</param>
     /// <param name="roofMaterial">Roof material</param>
     /// <param name="rooftopHeight">Height of rooftop</param>
-    public RoofFactory(XmlBaseFactory xmlBaseFactory, Material roofMaterial, float rooftopHeight) : base(xmlBaseFactory)
+    public RoofFactory(XmlBaseFactory xmlBaseFactory, Material roofMaterial) : base(xmlBaseFactory)
     {
         roofMat = roofMaterial;
-        roofHeight = rooftopHeight;
         CreateRooftops();
         parent.name = "Rooftops";
     }
@@ -101,7 +95,7 @@ internal class RoofFactory : InfrastructureManager
                 NodeFactory node2 = xmlBaseFactory.allNodes[building.ndref[i]];
 
                 // Calculate rooftop
-                Vector3 rooftop = new Vector3(0, building.height + roofHeight, 0); ;
+                Vector3 rooftop = new Vector3(0, building.height, 0); ;
                 vertices.Add(rooftop);
                 uvs.Add(new Vector2(0.5f, 0.5f));
                 normals.Add(Vector3.up);

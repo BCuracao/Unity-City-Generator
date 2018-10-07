@@ -27,15 +27,12 @@ public class EditorImportWindow : EditorWindow
     private Material footwayMaterial;
     private Material roofMaterial;
     private Material buildingMaterial;
-    private Material waterMaterial;
     private Material greenMaterial;
 
     /// <summary>
     /// Values to set in the import window
     /// </summary>
     private float rooftopHeight;
-    private float riverWitdh;
-    private float streamWidth;
 
     // Path to OSM file
     private string mapFilePath = "None (Choose OpenMap File)";
@@ -76,12 +73,8 @@ public class EditorImportWindow : EditorWindow
         roadMaterial = EditorGUILayout.ObjectField("Road Material", roadMaterial, typeof(Material), false) as Material;
         footwayMaterial = EditorGUILayout.ObjectField("Footway Material", footwayMaterial, typeof(Material), false) as Material;
         buildingMaterial = EditorGUILayout.ObjectField("Building Material", buildingMaterial, typeof(Material), false) as Material;
-        waterMaterial = EditorGUILayout.ObjectField("Waterway Material", waterMaterial, typeof(Material), false) as Material;
         roofMaterial = EditorGUILayout.ObjectField("Roof Material", roofMaterial, typeof(Material), false) as Material;
         greenMaterial = EditorGUILayout.ObjectField("Green area Material", greenMaterial, typeof(Material), false) as Material;
-        rooftopHeight = EditorGUILayout.FloatField("Rooftop Height", rooftopHeight);
-        riverWitdh = EditorGUILayout.FloatField("River Width", riverWitdh);
-        streamWidth = EditorGUILayout.FloatField("Stream Width", streamWidth);
 
 
         EditorGUI.BeginDisabledGroup(!validFile || disableUI);
@@ -89,7 +82,7 @@ public class EditorImportWindow : EditorWindow
         {
 
             var mapWrapper = new ImportMapWrapper(this, mapFilePath, roadMaterial, footwayMaterial, buildingMaterial,
-                                                        waterMaterial, roofMaterial, greenMaterial, rooftopHeight, riverWitdh, streamWidth);
+                                                        roofMaterial, greenMaterial);
 
             mapWrapper.Import();
         }

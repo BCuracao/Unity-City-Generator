@@ -31,12 +31,7 @@ internal sealed class ImportMapWrapper
     private Material _footwayMaterial;
     private Material _buildingMaterial;
     private Material _roofMaterial;
-    private Material _waterMaterial;
     private Material _greenMaterial;
-
-    private float _rooftopHeight;
-    private float _riverWidth;
-    private float _streamWidth;
 
     /// <summary>
     /// Constructor
@@ -47,25 +42,17 @@ internal sealed class ImportMapWrapper
     /// <param name="footwayMaterial">Footway material</param>
     /// <param name="buildingMaterial">building material</param>
     /// <param name="roofMaterial">Rooftop material</param>
-    /// <param name="waterMaterial">Water material</param>
     /// <param name="greenMaterial">Green material</param>
-    /// <param name="rooftopHeight">Height of rooftop</param>
-    /// <param name="riverWidth">Width of River</param>
-    /// <param name="streamWidth">Width of stream</param>
     public ImportMapWrapper(EditorImportWindow window, string mapFile, Material roadMaterial, Material footwayMaterial,
-                            Material buildingMaterial, Material waterMaterial, Material roofMaterial, Material greenMaterial, float rooftopHeight, float riverWidth, float streamWidth)
+                            Material buildingMaterial, Material roofMaterial, Material greenMaterial)
     {
         _window = window;
         _mapFile = mapFile;
         _roadMaterial = roadMaterial;
         _footwayMaterial = footwayMaterial;
         _buildingMaterial = buildingMaterial;
-        _waterMaterial = waterMaterial;
         _roofMaterial = roofMaterial;
         _greenMaterial = greenMaterial;
-        _rooftopHeight = rooftopHeight;
-        _riverWidth = riverWidth;
-        _streamWidth = streamWidth;
     }
 
     //Calls the factory classes and passes the values of the import window inputs
@@ -75,9 +62,9 @@ internal sealed class ImportMapWrapper
         xmlBaseFactory.Read(_mapFile);
 
         var buildingFactory = new BuildingFactory(xmlBaseFactory, _buildingMaterial);
-        var roofFactory = new RoofFactory(xmlBaseFactory, _roofMaterial, _rooftopHeight);
+        var roofFactory = new RoofFactory(xmlBaseFactory, _roofMaterial);
         var roadFactory = new RoadFactory(xmlBaseFactory, _roadMaterial, _footwayMaterial);
-        var environmentFactory = new EnvironmentFactory(xmlBaseFactory, _waterMaterial, _greenMaterial, _riverWidth, _streamWidth);
+        var environmentFactory = new EnvironmentFactory(xmlBaseFactory, _greenMaterial);
 
     }
 }
